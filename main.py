@@ -1,3 +1,5 @@
+import queue
+
 def read_file(transportation):
     symbols_dict = {}
     nodes_list = []
@@ -48,6 +50,7 @@ class Graph:
         if j not in self.adj_list:
             self.adj_list[j] = []
         self.adj_list[i].append((j, weight))
+        self.adj_list[j].append((i, weight))
 
     def build_graph(self, edges_list):
         for edge in edges_list:
@@ -57,12 +60,19 @@ class Graph:
             weight = float(parts[4])
             self.add_edges(i, j, weight)
 
+    def dijkstra(self, start, end):
+        distances = 0
+        predecessors = 0
+
 
 transp = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
 symbols_dict_output, nodes_list_output, edges_list_output = read_file(transp)
 
 instance_graph = Graph()
 instance_graph.build_graph(edges_list_output)
+
+start = input("Bitte geben Sie den Startpunkt ein: ")
+end = input("Bitte geben Sie das Ziel an: ")
 
 print(instance_graph.adj_list)
 # print(symbols_dict)

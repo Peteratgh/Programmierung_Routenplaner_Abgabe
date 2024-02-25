@@ -3,7 +3,6 @@ def read_file(transportation):
     nodes_list = []
     edges_list = []
 
-
     if transportation == "ped":
         dateiquelle = "hoexter_full_PED.txt"
     elif transportation == "bic":
@@ -36,9 +35,24 @@ def read_file(transportation):
 
     return symbols_dict, nodes_list, edges_list
 
-transportation = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
-symbols_dict, nodes_list, edges_list = read_file(transportation)
 
-print(symbols_dict)
-print(nodes_list)
-print(edges_list)
+# Eine Klasse für das Erstellen des Graphen erstellen
+# Später noch erweitern mit Einbahnstraßen
+class Graph:
+    def __init__(self):
+        self.adj_list = {}
+
+    def add_edges(self, i, j, weight):
+        if i not in self.adj_list:
+            self.adj_list[i] = []
+        if j not in self.adj_list:
+            self.adj_list[j] = []
+        self.adj_list[i].append((j, weight))
+
+
+transp = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
+symbols_dict_output, nodes_list_output, edges_list_output = read_file(transp)
+
+# print(symbols_dict)
+# print(nodes_list)
+# print(edges_list)

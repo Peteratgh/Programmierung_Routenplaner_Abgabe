@@ -39,6 +39,26 @@ def read_file(transportation):
     return symbols_dict, nodes_list, edges_list
 
 
+def find_key(dictionary, search_node):
+    for a, b in dictionary.items():
+        if b == search_node:
+            print("find_key Zwischenergebnis:", a)
+            return a
+    return None
+
+
+def find_node(edge, nodes_list, edges_list):
+    for item in edges_list:
+        parts = item.split(";")
+        if int(parts[3]) == edge:
+            node_from_symbol = parts[1]
+            for node in nodes_list:
+                if node.startswith(node_from_symbol):
+                    print("find_node Zwischenergebnis:", node)
+                    return int(node_from_symbol)
+    return None
+
+
 class Graph:
     def __init__(self):
         self.adj_list = {}

@@ -1,5 +1,6 @@
 import queue
 
+
 def read_file(transportation):
     symbols_dict = {}
     nodes_list = []
@@ -38,8 +39,6 @@ def read_file(transportation):
     return symbols_dict, nodes_list, edges_list
 
 
-# Eine Klasse für das Erstellen des Graphen erstellen
-# Später noch erweitern mit Einbahnstraßen
 class Graph:
     def __init__(self):
         self.adj_list = {}
@@ -61,20 +60,54 @@ class Graph:
             self.add_edges(i, j, weight)
 
     def dijkstra(self, start, end):
-        distances = 0
-        predecessors = 0
+        distances = {}
+        for node_count in self.adj_list:
+            distances[node_count] = float("inf")
+        predecessors = {}
+        for node_count in self.adj_list:
+            predecessors[node_count] = None
+        distances[start] = 0
+        priority_queue = queue.PriorityQueue()
+        priority_queue.put((0, start))
+
+        while not priority_queue.empty():
+            current_distance, current_predecessors = priority_queue.get()
+            if current_predecessors == end:
+                break
+            if current_distance > distances[current_predecessors]:
+                continue
+            for neighbor, weight in self.adj_list[current_predecessors]:
+                distance = current_distance + weight
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    predecessors[neighbor] = current_predecessors
+                    priority_queue.put((distance, neighbor))
+
+        return distances, predecessors
 
 
-transp = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
-symbols_dict_output, nodes_list_output, edges_list_output = read_file(transp)
+transport = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
+symbols_dict_output, nodes_list_output, edges_list_output = read_file(transport)
 
 instance_graph = Graph()
 instance_graph.build_graph(edges_list_output)
 
-start = input("Bitte geben Sie den Startpunkt ein: ")
-end = input("Bitte geben Sie das Ziel an: ")
+start_node = int(input("Bitte geben Sie den Startknoten ein: "))
+end_node = int(input("Bitte geben Sie den Zielknoten ein: "))
 
-print(instance_graph.adj_list)
+distances_calc, predecessors_calc = instance_graph.dijkstra(start_node, end_node)
+
+shortest_path = [end_node]
+while predecessors_calc[end_node] is not None:
+    end_node = predecessors_calc[end_node]
+    shortest_path.insert(0, end_node)
+
+distance_between_nodes = distances_calc[shortest_path[-1]]
+
+print("Kürzester Pfad von " + str(start_node) + " nach " + str(shortest_path[-1]) + ": " + str(shortest_path))
+print("Entfernung zwischen " + str(start_node) + " und " + str(shortest_path[-1]) + ": " + str(distance_between_nodes))
+
+# instance_graph.adj_list
 # print(symbols_dict)
 # print(nodes_list)
 # print(edges_list)

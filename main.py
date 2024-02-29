@@ -1,4 +1,5 @@
 import queue
+import time
 
 
 def read_file(transportation):
@@ -112,8 +113,14 @@ symbols_dict_output, nodes_list_output, edges_list_output = read_file(transport)
 instance_graph = Graph()
 instance_graph.build_graph(edges_list_output)
 
-start_node = int(input("Bitte geben Sie den Startknoten ein: "))
-end_node = int(input("Bitte geben Sie den Zielknoten ein: "))
+startpoint = input("Bitte geben Sie den Startpunkt ein: ")
+endpoint = input("Bitte geben Sie den Endpunkt ein: ")
+
+start_key = find_key(symbols_dict_output, startpoint)
+start_node = find_node(start_key, nodes_list_output, edges_list_output)
+
+end_key = find_key(symbols_dict_output, endpoint)
+end_node = find_node(end_key, nodes_list_output, edges_list_output)
 
 distances_calc, predecessors_calc = instance_graph.dijkstra(start_node, end_node)
 

@@ -1,5 +1,6 @@
 import sys
 
+
 def read_file(city, transportation):
     symbols_dict = {}
     nodes_list = []

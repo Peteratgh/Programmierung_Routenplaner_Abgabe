@@ -33,7 +33,7 @@ def main():
           "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
           "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
           "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n""\n"
-          "Viel Spaß beim Nutzen des Routenplaners!\n")
+          "Viel Spaß beim Nutzen des Routenplaners! \n")
     while True:
         city = input("Möchten Sie auf Daten für Rostock oder Höxter zugreifen? ").lower()
         transport = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()

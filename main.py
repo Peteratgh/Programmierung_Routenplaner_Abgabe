@@ -1,80 +1,6 @@
 import sys
 from graph import Graph
-
-
-def read_file(transportation):
-    symbols_dict = {}
-    nodes_list = []
-    edges_list = []
-
-    if transportation == "ped":
-        dateiquelle = "hoexter_full_PED.txt"
-    elif transportation == "bic":
-        dateiquelle = "hoexter_full_BIC.txt"
-    elif transportation == "car":
-        dateiquelle = "hoexter_full_CAR.txt"
-    else:
-        print("Ungültige Eingabe für Verkehrsmittel.")
-        return symbols_dict, nodes_list, edges_list
-
-    with open(dateiquelle, "r", encoding="UTF-8") as file:
-        current_selection = None
-        for line in file:
-            line = line.strip()
-            if line.startswith("# Section: Symbols"):
-                current_selection = "symbols"
-            elif line.startswith("# Section: Nodes"):
-                current_selection = "nodes"
-            elif line.startswith("# Section: Edges"):
-                current_selection = "edges"
-            else:
-                if current_selection == "symbols":
-                    parts = line.split(";")
-                    if len(parts) >= 2:
-                        symbols_dict[int(parts[0])] = parts[1]
-                elif current_selection == "nodes":
-                    nodes_list.append(line)
-                elif current_selection == "edges":
-                    parts = line.split(";")
-                    distance = float(parts[4])
-                    speed = float(parts[5])
-                    duration = round(distance / speed / 10, 6)
-                    updated_edge = ";".join(parts[:7]) + ";" + str(duration)
-                    edges_list.append(updated_edge)
-
-    return symbols_dict, nodes_list, edges_list
-
-
-def find_key(dictionary, search_node):
-    for a, b in dictionary.items():
-        if b.casefold() == search_node.casefold():
-            return a
-    return None
-
-
-def find_node(edge, nodes_list, edges_list):
-    for item in edges_list:
-        parts = item.split(";")
-        if int(parts[3]) == edge:
-            node_from_symbol = parts[1]
-            for node in nodes_list:
-                if node.startswith(node_from_symbol):
-                    return int(node_from_symbol)
-    return None
-
-
-def get_weight_index():
-    while True:
-        selection = input(
-            "Möchten Sie den Route anhand des kürzesten Weges (distance) oder des schnellsten Weges (time) ermitteln? ").lower()
-        if selection == 'exit':
-            sys.exit("Das Programm wurde beendet.")
-        if selection == 'distance':
-            return 4
-        elif selection == 'time':
-            return 7
-        else:
-            print("Ungültige Auswahl. Bitte wählen Sie 'distance' oder 'time'.")
+from data_processing import read_file, find_key, find_node, get_weight_index
 
 
 def output(symbols_dict, edges_list, named_path, startpoint, endpoint, weight_index):
@@ -102,11 +28,14 @@ def output(symbols_dict, edges_list, named_path, startpoint, endpoint, weight_in
 
 
 def main():
-    print("Dies ist ein Routenplaner zwischen vorgegebenen Straßen der Stadt Höxter.\nEr berechnet die Entfernung"
-          "zwischen zwei Straßen anhand der Distanz oder der schnellsten Fahrzeit und gibt Ihnen Die entsprechende"
-          "ermittelte Dauer und Strecke aus.\nAußerdem wird der Streckenverlauf anhand der abgefahrenen Straßen angegeben.\n"
-          "Sie können das Programm jederzeit mit der eingabe 'exit' beenden. Viel Spaß damit!\n")
+    print("Willkommen zum Routenplaner!\n""\n"
+          "Dieses Programm ermöglicht es Ihnen, die Entfernung zwischen zwei vorgegebenen Straßen basierend auf der Distanz oder der schnellsten Fahrzeit zu berechnen.\n"
+          "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
+          "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
+          "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n""\n"
+          "Viel Spaß beim Nutzen des Routenplaners!\n")
     while True:
+        city = input("Möchten Sie auf Daten für Rostock oder Höxter zugreifen? ").lower()
         transport = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
         if transport == 'exit':
             sys.exit("Das Programm wurde beendet.")
@@ -114,8 +43,7 @@ def main():
             print("Ungültige Eingabe für Verkehrsmittel.")
         else:
             break
-
-    symbols_dict_output, nodes_list_output, edges_list_output = read_file(transport)
+    symbols_dict_output, nodes_list_output, edges_list_output = read_file(city, transport)
     weight_index = get_weight_index()
     instance_graph = Graph()
     instance_graph.build_graph(edges_list_output, weight_index)

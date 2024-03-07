@@ -1,5 +1,17 @@
-Die Nutzung des Routenplaners sollte voll intuitiv ablaufen.
-Zunächst wird eine Eingabe der Stadt gefordert. In der Aktuellen Version sind Höxter und Rostock möglich.
-Als nächstes Wird wird das fortbewegungsmittel abgefragt. Hier sind zu Fuß(ped), Fahrrad(bic) oder Auto(car) möglich.
-Als nächstes wird der Nutzer abgefragt ob die Strecke aufgrund der schnellsten route(time) oder der kürzesten(distance) ermittelt werden soll.
-Daraufhin gibt dass prrogramm die zeit aus, die Dijkstra zur berechnung benötigt hat.
+# Routenplaner README  
+
+
+## Nutzung  
+Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zwischen den Städten Höxter und Rostock zu finden. Die verfügbaren Fortbewegungsmittel sind zu Fuß (ped), Fahrrad (bic) und Auto (car).
+
+## Anwendung  
+Starte das Programm.  
+Gib die gewünschte Stadt ein.  
+Wähle das Fortbewegungsmittel (ped/bic/car).  
+Wähle zwischen der schnellsten Route (time) oder der kürzesten Route (distance).  
+Gib den Startpunkt und das Ziel ein.  
+Die berechnete Route, Distanz, Fahrzeit und die Abfolge der befahrenen Straßen werden angezeigt.  
+Die Route wird als KML-Datei exportiert.  
+
+## Autoren
+Peter Schleining

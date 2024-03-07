@@ -76,12 +76,13 @@ def find_node(edge, nodes_list, edges_list):
 def get_weight_index():
     while True:
         selection = input(
-            "Möchten Sie den Route anhand des kürzesten Weges (distance) oder des schnellsten Weges (time) ermitteln? ").lower()
-        if selection == 'exit':
+            "Möchten Sie den Route anhand des kürzesten Weges (distance) oder des schnellsten Weges (time) ermitteln? "
+        ).lower()
+        if selection == "exit":
             sys.exit("Das Programm wurde beendet.")
-        if selection == 'distance':
+        if selection == "distance":
             return 4
-        elif selection == 'time':
+        elif selection == "time":
             return 7
         else:
             print("Ungültige Auswahl. Bitte wählen Sie 'distance' oder 'time'.")

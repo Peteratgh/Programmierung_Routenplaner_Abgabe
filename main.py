@@ -7,36 +7,48 @@ from output import output
 
 
 def main():
-    print("Willkommen zum Routenplaner!\n""\n"
-          "Dieses Programm ermöglicht es Ihnen, die Entfernung zwischen zwei vorgegebenen Straßen basierend auf der Distanz oder der schnellsten Fahrzeit zu berechnen.\n"
-          "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
-          "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
-          "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n""\n"
-          "Viel Spaß beim Nutzen des Routenplaners!\n")
+    print(
+        "Willkommen zum Routenplaner!\n"
+        "\n"
+        "Dieses Programm ermöglicht es Ihnen, die Entfernung zwischen zwei vorgegebenen Straßen basierend auf der Distanz oder der schnellsten Fahrzeit zu berechnen.\n"
+        "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
+        "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
+        "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n"
+        "\n"
+        "Viel Spaß beim Nutzen des Routenplaners!\n"
+    )
     while True:
-        city = input("Möchten Sie auf Daten für Rostock oder Höxter zugreifen? ").lower()
-        if city == 'exit':
+        city = input(
+            "Möchten Sie auf Daten für Rostock oder Höxter zugreifen? "
+        ).lower()
+        if city == "exit":
             sys.exit("Das Programm wurde beendet.")
         elif city not in ["rostock", "höxter"]:
             print("Ungültige Eingabe für die Stadt.")
         else:
             break
     while True:
-        transport = input("Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: ").lower()
-        if transport == 'exit':
+        transport = input(
+            "Bitte wählen Sie das Transportmittel aus: Ped, Bic oder Car: "
+        ).lower()
+        if transport == "exit":
             sys.exit("Das Programm wurde beendet.")
         elif transport not in ["ped", "bic", "car"]:
             print("Ungültige Eingabe für Verkehrsmittel.")
         else:
             break
-    symbols_dict_output, nodes_list_output, edges_list_output = read_file(city, transport)
+    symbols_dict_output, nodes_list_output, edges_list_output = read_file(
+        city, transport
+    )
     weight_index = get_weight_index()
     instance_graph = Graph()
     instance_graph.build_graph(edges_list_output, weight_index, transport)
 
     while True:
-        startpoint = input("Bitte geben Sie den Startpunkt ein: ").capitalize().strip().lower()
-        if startpoint == 'exit':
+        startpoint = (
+            input("Bitte geben Sie den Startpunkt ein: ").capitalize().strip().lower()
+        )
+        if startpoint == "exit":
             sys.exit("Das Programm wurde beendet.")
         elif startpoint not in map(str.lower, symbols_dict_output.values()):
             print("Ungültiger Startpunkt.")
@@ -44,8 +56,10 @@ def main():
             break
 
     while True:
-        endpoint = input("Bitte geben Sie den Endpunkt ein: ").capitalize().strip().lower()
-        if endpoint == 'exit':
+        endpoint = (
+            input("Bitte geben Sie den Endpunkt ein: ").capitalize().strip().lower()
+        )
+        if endpoint == "exit":
             sys.exit("Das Programm wurde beendet.")
         elif endpoint not in map(str.lower, symbols_dict_output.values()):
             print("Ungültiger Endpunkt.")

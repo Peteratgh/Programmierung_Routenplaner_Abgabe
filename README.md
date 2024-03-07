@@ -13,7 +13,7 @@ Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zw
 * Die berechnete Route, Distanz, Fahrzeit und die Abfolge der befahrenen Straßen werden angezeigt.  
 * Die Route wird als KML-Datei exportiert.  
 
-###To-Do
+### To-Do
 - [ ] Export von KML optional machen
 - [ ] Abgefahrene Straßen übersichtlicher ausgeben(mit Teilstreckendistanz)
 - [ ] Richtungen hinzufügen

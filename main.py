@@ -1,4 +1,5 @@
 import sys
+import time
 
 from data_processing import read_file, find_key, find_node, get_weight_index
 from export_kml import export_kml
@@ -6,17 +7,18 @@ from graph import Graph
 from output import output
 
 
-def main():
-    print(
-        "Willkommen zum Routenplaner!\n"
-        "\n"
-        "Dieses Programm ermöglicht es Ihnen, die Entfernung zwischen zwei vorgegebenen Straßen basierend auf der Distanz oder der schnellsten Fahrzeit zu berechnen.\n"
-        "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
-        "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
-        "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n"
-        "\n"
-        "Viel Spaß beim Nutzen des Routenplaners!\n"
-    )
+def main(restart="n"):
+    if restart == "n":
+        print(
+            "Willkommen zum Routenplaner!\n"
+            "\n"
+            "Dieses Programm ermöglicht es Ihnen, die Entfernung zwischen zwei vorgegebenen Straßen basierend auf der Distanz oder der schnellsten Fahrzeit zu berechnen.\n"
+            "Sie erhalten die entsprechende ermittelte Dauer und Strecke.\n"
+            "Darüber hinaus wird Ihnen der Streckenverlauf anhand der abgefahrenen Straßen angezeigt.\n"
+            "Zum Beenden des Programms können Sie jederzeit die Eingabe 'exit' verwenden.\n"
+            "\n"
+            "Viel Spaß beim Nutzen des Routenplaners!\n"
+        )
     while True:
         city = input(
             "Möchten Sie auf Daten für Rostock oder Höxter zugreifen? "
@@ -37,6 +39,7 @@ def main():
             print("Ungültige Eingabe für Verkehrsmittel.")
         else:
             break
+
     symbols_dict_output, nodes_list_output, edges_list_output = read_file(
         city, transport
     )
@@ -65,7 +68,7 @@ def main():
             print("Ungültiger Endpunkt.")
         else:
             break
-
+    start_time_main = time.time()
     start_key = find_key(symbols_dict_output, startpoint.capitalize())
     start_node = find_node(start_key, nodes_list_output, edges_list_output)
     end_key = find_key(symbols_dict_output, endpoint.capitalize())
@@ -78,9 +81,31 @@ def main():
         end_node = predecessors_calc[end_node]
         shortest_path.insert(0, end_node)
 
-    output(symbols_dict_output, edges_list_output, shortest_path, startpoint, endpoint)
+    output(
+        symbols_dict_output,
+        edges_list_output,
+        shortest_path,
+        nodes_list_output,
+        startpoint,
+        endpoint,
+    )
 
     export_kml(nodes_list_output, shortest_path, startpoint, endpoint, weight_index)
+    end_time_main = time.time()
+    computation_time_main = end_time_main - start_time_main
+    print(
+        "\nAusführungszeit des Programms(Benutzereingaben ausgenommen): ",
+        computation_time_main,
+        "Sekunden\n",
+    )
+
+    restart = input("Möchten Sie einen neuen Durchlauf starten?[y/n] ")
+    print("\n")
+
+    if restart == "y":
+        main(restart)
+    else:
+        print("Vielen Dank für das Nutzen des Routenplaners")
 
 
 if __name__ == "__main__":

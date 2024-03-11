@@ -15,6 +15,7 @@ Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zw
 
 ### To-Do
 - [ ] Export von KML optional machen
+- [ ] Die auswahl des Startknotens soll nicht anhand des ersten eintrags der txt file statt finden sondern anhand des mittleren Eintrags
 - [ ] Abgefahrene Straßen übersichtlicher ausgeben(mit Teilstreckendistanz)
 - [ ] Richtungen hinzufügen
 - [ ] logging implementieren

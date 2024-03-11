@@ -63,13 +63,21 @@ def find_key(dictionary, search_node):
 
 
 def find_node(edge, nodes_list, edges_list):
+    matching_edges = []
     for item in edges_list:
         parts = item.split(";")
         if int(parts[3]) == edge:
-            node_from_symbol = parts[1]
-            for node in nodes_list:
-                if node.startswith(node_from_symbol):
-                    return int(node_from_symbol)
+            matching_edges.append(item)
+
+    middle_index = len(matching_edges) // 2
+    if middle_index < len(matching_edges):
+        middle_edge = matching_edges[middle_index]
+        parts = middle_edge.split(";")
+        node_from_symbol = parts[1]
+        for node in nodes_list:
+            if node.startswith(node_from_symbol):
+                return int(node_from_symbol)
+
     return None
 
 

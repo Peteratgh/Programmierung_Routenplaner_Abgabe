@@ -14,12 +14,12 @@ Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zw
 * Die Route wird als KML-Datei exportiert.  
 
 ### To-Do
-- [ ] Export von KML optional machen
-- [ ] Die auswahl des Startknotens soll nicht anhand des ersten eintrags der txt file statt finden sondern anhand des mittleren Eintrags
-- [ ] Abgefahrene Straßen übersichtlicher ausgeben(mit Teilstreckendistanz)
-- [ ] Richtungen hinzufügen
+- [x] Export von KML optional machen
+- [x] Die auswahl des Startknotens soll nicht anhand des ersten Eintrags der txt file statt finden sondern anhand des mittleren Eintrags
+- [x] Abgefahrene Straßen übersichtlicher ausgeben(mit Teilstreckendistanz)
+- [x] Richtungen hinzufügen
 - [ ] logging implementieren
-- [ ] Gesamtzeit für die Ausführung des Programms ausgeben
+- [x] Gesamtzeit für die Ausführung des Programms ausgeben
 
 
 ## Autoren

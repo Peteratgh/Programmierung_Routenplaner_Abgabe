@@ -89,10 +89,14 @@ def main(restart="n"):
         startpoint,
         endpoint,
     )
+    kml_request = input("Möchten Sie die Route als KML-Datei exportieren?[y/n] ")
 
-    export_kml(nodes_list_output, shortest_path, startpoint, endpoint, weight_index)
     end_time_main = time.time()
     computation_time_main = end_time_main - start_time_main
+
+    if kml_request == "y":
+        export_kml(nodes_list_output, shortest_path, startpoint, endpoint, weight_index)
+
     print(
         "\nAusführungszeit des Programms(Benutzereingaben ausgenommen): ",
         computation_time_main,

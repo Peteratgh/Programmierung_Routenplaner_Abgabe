@@ -49,5 +49,5 @@ class Graph:
 
         end_time = time.time()
         computation_time = end_time - start_time
-        print("\nBerechnungszeit der Route:", computation_time, "Sekunden")
+        print("\nBerechnungszeit der Route: ", computation_time, "Sekunden\n")
         return distances, predecessors

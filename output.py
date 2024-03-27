@@ -15,16 +15,20 @@ def get_direction(origin_lat, origin_lon, target_lat, target_lon):
 
 def direction(nodes_list, last_node, current_node, next_node):
     previous_direction = get_direction(
-        *map(float, nodes_list[last_node].split(";")[1:]),
-        *map(float, nodes_list[current_node].split(";")[1:]),
+        float(nodes_list[last_node].split(";")[1]),
+        float(nodes_list[last_node].split(";")[2]),
+        float(nodes_list[current_node].split(";")[1]),
+        float(nodes_list[current_node].split(";")[2])
     )
     current_direction = get_direction(
-        *map(float, nodes_list[current_node].split(";")[1:]),
-        *map(float, nodes_list[next_node].split(";")[1:]),
+        float(nodes_list[current_node].split(";")[1]),
+        float(nodes_list[current_node].split(";")[2]),
+        float(nodes_list[next_node].split(";")[1]),
+        float(nodes_list[next_node].split(";")[2])
     )
     angle = previous_direction - current_direction
 
-    directions = ["N", "NO", "O", "SO", "S", "SW", "W", "NW", "N"]
+    directions = ["Norden", "Nordosten", "Osten", "Südosten", "Süden", "Südwesten", "Westen", "Nordwesten", "Norden"]
 
     index = int((current_direction + 22.5) / 45)
 
@@ -46,11 +50,11 @@ def output(
     prev_street = None
     intermediate_distance = 0
     last_node = 0
-    out, himmel = direction(
+    out,  quarter = direction(
         nodes_list, last_node, shortest_path_nodes[0], shortest_path_nodes[1]
     )
     print("Route von " + startpoint.title() + " nach " + endpoint.title() + ":\n")
-    print("Fahren Sie Richtung " + himmel)
+    print("Fahren Sie Richtung " + quarter)
     for i in range(len(shortest_path_nodes) - 1):
         current_node = shortest_path_nodes[i]
         next_node = shortest_path_nodes[i + 1]

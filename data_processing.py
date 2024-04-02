@@ -5,6 +5,7 @@ def read_file(city, transportation):
     symbols_dict = {}
     nodes_list = []
     edges_list = []
+    dateiquelle = "Daten/rostock_CAR.txt"
 
     if city.lower() == "rostock":
         if transportation == "ped":
@@ -16,6 +17,7 @@ def read_file(city, transportation):
         else:
             print("Ungültige Eingabe für Verkehrsmittel.")
             return symbols_dict, nodes_list, edges_list
+
     elif city.lower() == "höxter":
         if transportation == "ped":
             dateiquelle = "Daten/hoexter_full_PED.txt"
@@ -49,8 +51,8 @@ def read_file(city, transportation):
                     distance = float(parts[4])
                     speed = float(parts[5])
                     duration = round(distance / speed / 10, 6)
-                    updated_edge = ";".join(parts[:7]) + ";" + str(duration)
-                    edges_list.append(updated_edge)
+                    updated_list = line + ";" + str(duration)
+                    edges_list.append(updated_list)
 
     return symbols_dict, nodes_list, edges_list
 

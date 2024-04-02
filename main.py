@@ -43,6 +43,7 @@ def main(restart="n"):
     symbols_dict_output, nodes_list_output, edges_list_output = read_file(
         city, transport
     )
+
     weight_index = get_weight_index()
     instance_graph = Graph()
     instance_graph.build_graph(edges_list_output, weight_index, transport)
@@ -68,6 +69,7 @@ def main(restart="n"):
             print("Ungültiger Endpunkt.")
         else:
             break
+
     start_time_main = time.time()
     start_key = find_key(symbols_dict_output, startpoint.capitalize())
     start_node = find_node(start_key, nodes_list_output, edges_list_output)
@@ -89,7 +91,7 @@ def main(restart="n"):
         startpoint,
         endpoint,
     )
-    kml_request = input("Möchten Sie die Route als KML-Datei exportieren?[y/n] ")
+    kml_request = input("\nMöchten Sie die Route als KML-Datei exportieren?[y/n] ")
 
     end_time_main = time.time()
     computation_time_main = end_time_main - start_time_main

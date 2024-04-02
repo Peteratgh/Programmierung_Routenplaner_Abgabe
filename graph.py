@@ -6,26 +6,22 @@ class Graph:
     def __init__(self):
         self.adj_list = {}
 
-    def add_edges(self, i, j, weight, bidirectional=True):
-        if i not in self.adj_list:
-            self.adj_list[i] = []
-        if j not in self.adj_list:
-            self.adj_list[j] = []
-        self.adj_list[i].append((j, weight))
-        if bidirectional:
-            self.adj_list[j].append((i, weight))
-
     def build_graph(self, edges_list, weight_selection, transport):
         for edge in edges_list:
             parts = edge.split(";")
             i = int(parts[1])
             j = int(parts[2])
             weight = float(parts[weight_selection])
+            bidirectional = True
             if parts[6] == "false" and transport == "car".lower():
-                oneway = False
-            else:
-                oneway = True
-            self.add_edges(i, j, weight, oneway)
+                bidirectional = False
+            if i not in self.adj_list:
+                self.adj_list[i] = []
+            if j not in self.adj_list:
+                self.adj_list[j] = []
+            self.adj_list[i].append((j, weight))
+            if bidirectional:
+                self.adj_list[j].append((i, weight))
 
     def dijkstra(self, start, end):
         distances = {node_count: float("inf") for node_count in self.adj_list}

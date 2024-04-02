@@ -76,7 +76,7 @@ def output(
 
                 if street_name != prev_street:
                     if prev_street is not None:
-                        out, himmel = direction(
+                        out, quarter = direction(
                             nodes_list, last_node, current_node, next_node
                         )
 

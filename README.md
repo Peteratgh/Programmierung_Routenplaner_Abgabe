@@ -2,7 +2,11 @@
 
 
 ## Nutzung  
-Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zwischen den Städten Höxter und Rostock zu finden. Die verfügbaren Fortbewegungsmittel sind zu Fuß (ped), Fahrrad (bic) und Auto (car).
+Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zwischen den Städten Höxter und Rostock zu finden. Die verfügbaren Fortbewegungsmittel sind zu Fuß (ped), Fahrrad (bic) und Auto (car). Das Programm kann jederzeit durch die Eingabe "exit" beendet werden.
+
+### Hinweis
+
+Bei der Zeitberechnung für den Fußgänger wird eine Geschwindigkeit von 5 km/h angekommen. Bei der Streckenberechnung mit dem Auto werden außerdem Einbahnstraßen berücksichtigt.
 
 ## Anwendung  
 * Starte das Programm.  
@@ -11,7 +15,8 @@ Dieses Programm ermöglicht es Benutzern, die schnellste oder kürzeste Route zw
 * Wähle zwischen der schnellsten Route (time) oder der kürzesten Route (distance).  
 * Gib den Startpunkt und das Ziel ein.  
 * Die berechnete Route, Distanz, Fahrzeit und die Abfolge der befahrenen Straßen werden angezeigt.  
-* Die Route wird als KML-Datei exportiert.  
+* Die Route kann als KML-Datei exportiert werden.
+* Wähle, ob du das Programm erneut ausführen möchtest.
 
 ### To-Do
 - [x] Export von KML optional machen
